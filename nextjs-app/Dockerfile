@@ -3,10 +3,22 @@
 # -----------------------------
 FROM node:20-alpine AS builder
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci
+
+# Install pnpm globally
+RUN corepack enable
+
+# Copy files needed for dependency install
+COPY pnpm-lock.yaml ./
+COPY package.json ./
+
+# Install dependencies using pnpm
+RUN pnpm install --frozen-lockfile
+
+# Copy rest of project
 COPY . .
-RUN npm run build
+
+# Build the Next.js app
+RUN pnpm run build
 
 # -----------------------------
 # 2. Runtime stage
@@ -17,7 +29,10 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=3000
 
-# Copy only the standalone output and static assets
+# Enable pnpm for runtime as well
+RUN corepack enable
+
+# Copy standalone output & public assets
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/public ./public
