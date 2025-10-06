@@ -1,0 +1,12 @@
+networks:
+  supabase_default:
+    external: true
+
+services:
+  nextjs:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    networks:
+      - supabase_default  # same network as your other services
