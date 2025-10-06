@@ -4,20 +4,19 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-# Install pnpm globally
+# Enable pnpm (built into corepack in Node 20)
 RUN corepack enable
 
-# Copy files needed for dependency install
-COPY pnpm-lock.yaml ./
-COPY package.json ./
+# Copy only the manifest files first
+COPY package.json pnpm-lock.yaml ./
 
-# Install dependencies using pnpm
+# Install deps with pnpm
 RUN pnpm install --frozen-lockfile
 
-# Copy rest of project
+# Now copy the rest of the project *after* installing deps
 COPY . .
 
-# Build the Next.js app
+# Build Next.js
 RUN pnpm run build
 
 # -----------------------------
@@ -29,10 +28,10 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=3000
 
-# Enable pnpm for runtime as well
+# Enable pnpm
 RUN corepack enable
 
-# Copy standalone output & public assets
+# Copy standalone output and static assets
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/public ./public
