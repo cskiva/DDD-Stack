@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "post_tests",
+  "info": {
+    "name": "post_test"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "body": {
+      "type": "richtext"
+    },
+    "body_2": {
+      "type": "richtext"
+    },
+    "title": {
+      "type": "string"
+    },
+    "pic": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    }
+  }
+}

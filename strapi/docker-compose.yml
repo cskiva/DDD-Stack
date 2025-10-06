@@ -1,0 +1,32 @@
+networks:
+  supabase_default:
+    external: true
+
+services:
+  strapi:
+    image: strapi/strapi:latest
+    restart: unless-stopped
+    #depends_on:
+      #- supabase-db
+    environment:
+      # --- Database ---
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: supabase-db
+      DATABASE_PORT: 5432
+      DATABASE_NAME: strapi
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
+      # --- App config ---
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 1337
+      APP_KEYS: test1,tyest2,test3,test4         # Replace for production
+      API_TOKEN_SALT: test-apisalt
+      ADMIN_JWT_SECRET: ${JWT_SECRET}
+      JWT_SECRET: ${JWT_SECRET}
+    volumes:
+      - ./strapi-app:/srv/app
+    ports:
+      - "1337:1337"
+    networks:
+      [supabase_default]     # ✅ this is your actual network

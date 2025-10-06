@@ -1,0 +1,36 @@
+# === Docker / containers ===
+**/node_modules/
+**/.cache/
+**/.tmp/
+**/build/
+**/dist/
+**/logs/
+**/data/
+**/volumes/
+**/uploads/
+
+# Supabase data + generated content
+supabase/
+supabase/.env*
+supabase-project/volumes/
+supabase-project/dev/
+supabase-project/data.sql
+supabase/docker/.env
+
+# Strapi local environment
+strapi/strapi-app/.env
+strapi/strapi-app/node_modules/
+strapi/strapi-app/build/
+strapi/strapi-app/public/uploads/
+
+# Common secrets
+.env
+*.pem
+*.key
+*.crt
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,12 @@
+services:
+  supabase:
+    extends:
+      file: ./supabase-project/docker-compose.yml
+      service: supabase
+    networks:
+      - shared
+    working_dir: /supabase-project
+
+networks:
+  shared:
+    driver: bridge
