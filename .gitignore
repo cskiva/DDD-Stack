@@ -7,7 +7,7 @@
 **/dist/
 **/logs/
 **/data/
-**/volumes/
+**/volumes/data
 **/uploads/
 
 # Supabase data + generated content

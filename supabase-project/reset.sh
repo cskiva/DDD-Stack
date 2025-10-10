@@ -14,7 +14,7 @@ docker compose -f docker-compose.yml -f ./dev/docker-compose.dev.yml down -v --r
 
 echo "Cleaning up bind-mounted directories..."
 BIND_MOUNTS=(
-  "./volumes/db/data"
+  "./volumes"
 )
 
 for DIR in "${BIND_MOUNTS[@]}"; do

@@ -1,0 +1,4 @@
+CREATE DATABASE strapi WITH OWNER postgres;
+\connect strapi
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS "pg_trgm";

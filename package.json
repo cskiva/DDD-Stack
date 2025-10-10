@@ -1,0 +1,13 @@
+{
+	"private": true,
+	"scripts": {
+		"dev:services": "docker compose -f docker-compose.yml up -d",
+		"dev:next": "bash -lc 'cd nextjs-app && npm run dev'",
+		"dev": "npm run dev:services && npm run dev:next",
+		"stop": "docker compose down",
+		"clean": "docker compose down -v --remove-orphans"
+	},
+	"devDependencies": {
+		"cross-env": "^7.0.3"
+	}
+}
