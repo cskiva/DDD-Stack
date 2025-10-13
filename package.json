@@ -3,7 +3,8 @@
 	"scripts": {
 		"dev:services": "docker compose -f docker-compose.yml up -d",
 		"dev:next": "bash -lc 'cd nextjs-app && npm run dev'",
-		"dev": "npm run dev:services && npm run dev:next",
+		"dev:strapi": "bash -lc 'cd strapi/strapi-app && npm run dev",
+		"dev": "npm run dev:services && npm run dev:next && npm run dev:strapi",
 		"stop": "docker compose down",
 		"clean": "docker compose down -v --remove-orphans"
 	},
